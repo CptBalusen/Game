@@ -11,9 +11,15 @@ config_version=5
 [application]
 
 config/name="Game"
+
 run/main_scene="res://Userinterfaces/MainMenue/cs_main_menue.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+
 config/icon="res://icon.svg"
+
+[aseprite]
+
+import/import_plugin/default_automatic_importer="SpriteFrames"
 
 [dotnet]
 
@@ -21,4 +27,6 @@ project/assembly_name="Game"
 
 [editor_plugins]
 
+
 enabled=PackedStringArray("res://addons/script-tabs/plugin.cfg")
+
