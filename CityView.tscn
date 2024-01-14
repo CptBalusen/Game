@@ -1,12 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://b74ylqso7ojj7"]
+[gd_scene load_steps=5 format=3 uid="uid://b74ylqso7ojj7"]
 
+[ext_resource type="Script" path="res://CityView.gd" id="1_f3hw4"]
 [ext_resource type="PackedScene" uid="uid://g08j201c8bkc" path="res://Characters/MainChar/MainChar.tscn" id="1_o3vqu"]
 [ext_resource type="PackedScene" uid="uid://dyhqixveqob5h" path="res://Buildings/House1/House1.tscn" id="2_o0xxj"]
+[ext_resource type="Script" path="res://backToMenu.gd" id="4_gscx6"]
 
 [node name="CityView" type="Node2D"]
+script = ExtResource("1_f3hw4")
 
 [node name="MainChar" parent="." instance=ExtResource("1_o3vqu")]
 position = Vector2(-278, -67)
 
 [node name="House1" parent="." instance=ExtResource("2_o0xxj")]
 position = Vector2(-26, -19)
+
+[node name="playerViewCam" type="Camera2D" parent="."]
+
+[node name="Interface" type="Control" parent="playerViewCam"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -576.0
+offset_top = -323.0
+offset_right = 576.0
+offset_bottom = 325.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="backToMenu" type="Button" parent="playerViewCam/Interface"]
+layout_mode = 1
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back to menu"
+script = ExtResource("4_gscx6")
