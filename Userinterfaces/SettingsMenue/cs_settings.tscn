@@ -23,11 +23,9 @@ text = "Settings"
 
 [node name="b_BackToMenu" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -31.0
-offset_right = 123.0
-grow_vertical = 0
+offset_left = 7.0
+offset_top = 613.0
+offset_right = 127.0
+offset_bottom = 644.0
 text = "Back to Menu"
 script = ExtResource("1_axvwg")

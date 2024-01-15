@@ -1,6 +1,6 @@
 extends Control
 
-@onready var backButton = $b_BackToMenue
+@onready var backButton = $b_BackToMenu
 signal scene_changer(id)
 
 # Called when the node enters the scene tree for the first time.

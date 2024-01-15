@@ -2,7 +2,6 @@ extends Control
 
 @onready var settingsButton = $b_OpenSettings
 @onready var startButton = $b_StartGame
-@onready var progress = $ProgressBar
 signal scene_changer(id)
 
 # Called when the node enters the scene tree for the first time.
