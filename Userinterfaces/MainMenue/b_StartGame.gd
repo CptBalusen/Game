@@ -1,5 +1,7 @@
 extends Button
 
+signal scene_change(id)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,4 +13,5 @@ func _process(delta):
 	pass
 
 func _pressed():
-	get_tree().change_scene_to_file("res://CityView.tscn")
+	scene_change.emit(2)
+

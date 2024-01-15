@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="Game"
-run/main_scene="res://Userinterfaces/MainMenue/cs_main_menue.tscn"
+run/main_scene="res://GameView.tscn"
+
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -29,4 +30,5 @@ project/assembly_name="Game"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/script-tabs/plugin.cfg")
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/script-tabs/plugin.cfg")

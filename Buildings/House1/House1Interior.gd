@@ -1,23 +1,15 @@
 extends Node2D
 
 
-signal scene_changer(id)
-
-@onready var camera = $playerViewCam
-@onready var player = $MainChar
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_node("Camera2D").make_current();
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	setCamera()
-	pass
-
-func setCamera():
-	#var interface = $Interface;
-	camera.set_position(player.get_position())
+	if Input.is_action_just_pressed("ui_text_delete"):
+		print(get_parent().name)
+		#get_parent()._exit_house()
 	pass
