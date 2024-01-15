@@ -12,4 +12,4 @@ func _process(delta):
 	pass
 	
 func _pressed():
-	scene_change.emit(1)
+	scene_change.emit(2)

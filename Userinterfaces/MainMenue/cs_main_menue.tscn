@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1g2f52nxr2da"]
+[gd_scene load_steps=5 format=3 uid="uid://c1g2f52nxr2da"]
 
+[ext_resource type="Script" path="res://Userinterfaces/MainMenue/cs_main_menue.gd" id="1_1b08j"]
 [ext_resource type="Script" path="res://Userinterfaces/MainMenue/b_OpenSettings.gd" id="1_ar3j7"]
+[ext_resource type="Script" path="res://Userinterfaces/MainMenue/b_StartGame.gd" id="3_pvkkv"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wh5t2"]
 light_mode = 1
@@ -13,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1b08j")
 
 [node name="b_OpenSettings" type="Button" parent="."]
 layout_mode = 0
@@ -36,6 +39,7 @@ offset_top = 412.112
 offset_right = 617.544
 offset_bottom = 444.112
 text = "Start game"
+script = ExtResource("3_pvkkv")
 
 [node name="l_GameName" type="Label" parent="."]
 layout_mode = 0
