@@ -1,14 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://b74ylqso7ojj7"]
+[gd_scene load_steps=7 format=3 uid="uid://b74ylqso7ojj7"]
 
-[ext_resource type="Script" path="res://EventHandling.gd" id="1_fudwe"]
-[ext_resource type="Script" path="res://CityView.gd" id="1_f3hw4"]
+[ext_resource type="Script" path="res://Level/City1/CityView.gd" id="1_f3hw4"]
+[ext_resource type="Script" path="res://Level/City1/EventHandling.gd" id="1_fudwe"]
 [ext_resource type="PackedScene" uid="uid://g08j201c8bkc" path="res://Characters/MainChar/MainChar.tscn" id="1_o3vqu"]
-[ext_resource type="Script" path="res://CityView.gd" id="1_rvvlf"]
 [ext_resource type="PackedScene" uid="uid://dyhqixveqob5h" path="res://Buildings/House1/House1.tscn" id="2_o0xxj"]
-[ext_resource type="Script" path="res://backToMenu.gd" id="4_gscx6"]
+[ext_resource type="Script" path="res://Level/City1/backToMenu.gd" id="4_gscx6"]
+[ext_resource type="PackedScene" uid="uid://ndjgyfvjtgv0" path="res://Characters/NPC/NPC.tscn" id="6_1rj0r"]
 
 [node name="CityView" type="Node2D"]
-script = ExtResource("1_rvvlf")
 script = ExtResource("1_f3hw4")
 
 [node name="MainChar" parent="." instance=ExtResource("1_o3vqu")]
@@ -40,3 +39,12 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Back to menu"
 script = ExtResource("4_gscx6")
+
+[node name="Npc" parent="." instance=ExtResource("6_1rj0r")]
+position = Vector2(-374, -167)
+
+[node name="Npc2" parent="." instance=ExtResource("6_1rj0r")]
+position = Vector2(-295, 131)
+
+[node name="Npc3" parent="." instance=ExtResource("6_1rj0r")]
+position = Vector2(-77, 142)
