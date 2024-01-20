@@ -1,8 +1,5 @@
 extends CharacterBody2D
 
-class_name Infected_NPC
-
-var Infected_NPCScene
 var current_state = IDLE
 @export var speed = 30
 var dir = Vector2.RIGHT
@@ -13,14 +10,12 @@ enum {
 	IDLE,
 	NEW_DIR,
 	MOVE,
-	INFECTED
 }
 
 func _ready():
-	add_to_group("NPC")
+	add_to_group("Infected_NPC")
 	randomize()
 	start_pos = position
-	Infected_NPCScene = preload("res://Characters/NPC/Infected_NPC/Infected_NPC.tscn")
 
 func _process(delta):
 	
@@ -63,21 +58,7 @@ func choose(array):
 
 func _on_timer_timeout():
 	$Timer.wait_time = choose([0.5, 1, 1.5])
-	if (current_state != INFECTED):
-		current_state = choose([IDLE, NEW_DIR, MOVE])
-	else:		
-		var oInfected_NPC = Infected_NPCScene.instantiate()
-		oInfected_NPC.set_position(get_position())
-		get_parent().add_child(oInfected_NPC)
-		queue_free()
-		visible = false
-		pass
-		
-
-func infect():
-	print("hiillffee mama ich bin infiziert")
-	current_state = INFECTED
-	pass
+	current_state = choose([IDLE, NEW_DIR, MOVE])
 	
 func getCurrentState():
 	return current_state

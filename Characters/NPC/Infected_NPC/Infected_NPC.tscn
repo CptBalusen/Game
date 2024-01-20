@@ -1,3 +1,119 @@
-[gd_scene format=3 uid="uid://2pi5gir0c7dg"]
+[gd_scene load_steps=17 format=3 uid="uid://2pi5gir0c7dg"]
+
+[ext_resource type="Script" path="res://Characters/NPC/Infected_NPC/Infected_NPC.gd" id="1_a6tdx"]
+[ext_resource type="Texture2D" uid="uid://b0cxi3vpdgt4f" path="res://assets/NPCs/Infected_NPC/infected_npc.png" id="2_61x7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31ioy"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(0, 0, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojdm6"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(17, 0, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w25rs"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(34, 0, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtmd"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(51, 0, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vurkb"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(0, 20, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jta1k"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(17, 20, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_we6h3"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(34, 20, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddoyc"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(51, 20, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oo16"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(0, 40, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7xa2"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(17, 40, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3olk4"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(34, 40, 17, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2253k"]
+atlas = ExtResource("2_61x7o")
+region = Rect2(51, 40, 17, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gxro8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31ioy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojdm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w25rs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vurkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jta1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_we6h3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddoyc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3oo16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7xa2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3olk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2253k")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4u0e0"]
+radius = 16.0
 
 [node name="InfectedNpc" type="CharacterBody2D"]
+script = ExtResource("1_a6tdx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_gxro8")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4u0e0")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
