@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
+var playerCoughScene
+var oPlayerCough
 
 const SPEED = 300.0
 const JUMP_VELOCITY = 0.0
+const ACCELERATION = 500
+const FRICTION = 2500
 var oldCollider
 
 signal house_collision(id)
@@ -10,31 +14,52 @@ signal house_collision(id)
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	add_to_group("MainChar")
+	playerCoughScene = preload("res://Characters/MainChar/playerCough.tscn")
+	set_process_input(true)
+	pass
 
 func _physics_process(delta):
-	# Add the gravity.
-	#	if not is_on_floor():
-	#	velocity.y += gravity * delta
+	var input = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+	player_movement(input, delta)
+	move_and_slide()
 
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-	#	velocity.y = JUMP_VELOCITY
+func player_movement(input, delta):
+	if input: 
+		#movement
+		if input.x > 0:
+			$AnimatedSprite2D.flip_h = false
+		elif input.x < 0:
+			$AnimatedSprite2D.flip_h = true
+		velocity = velocity.move_toward(input * SPEED , delta * ACCELERATION)
+		$AnimatedSprite2D.play("walk")
+	else: 
+		#no movement
+		velocity = velocity.move_toward(Vector2(0,0), delta * FRICTION)
+		$AnimatedSprite2D.play("idle")
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.y = direction.y * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+func _input(event):
+	if event is InputEventKey and event.is_pressed():
+		match event.keycode:
+			KEY_H:
+				#cough
+				createPlayerCough()
+				pass
+	pass
 
-	if move_and_slide():
-		if oldCollider != get_slide_collision(0).get_collider():
-			house_collision.emit(get_slide_collision(0).get_collider())
-			oldCollider = get_slide_collision(0).get_collider()
-	else :
-		oldCollider = null
+func createPlayerCough():
+	if !oPlayerCough:
+		oPlayerCough = playerCoughScene.instantiate()
+		add_child(oPlayerCough)
+		$Timer.start(1)
 		
-		
+	#oPlayerCough.set_position(get_position())
+	#create a timer for playerCough to delete it after 2 seconds or smthng like that
+	pass
+
+func _on_Cough_timeout():
+	if oPlayerCough:
+		oPlayerCough.queue_free()
+		oPlayerCough = null
+	pass # Replace with function body.
