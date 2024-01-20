@@ -2,12 +2,12 @@ extends Control
 
 @onready var settingsButton = $b_OpenSettings
 @onready var startButton = $b_StartGame
-signal scene_changer(id)
+signal sceneChanger(id)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	settingsButton.scene_change.connect(_scene_change)
-	startButton.scene_change.connect(_scene_change)
+	settingsButton.sceneChange.connect(sceneChange)
+	startButton.sceneChange.connect(sceneChange)
 	pass # Replace with function body.
 	
 	
@@ -15,6 +15,6 @@ func _ready():
 func _process(delta):
 	pass
 	
-func _scene_change(sceneID):
-	scene_changer.emit(sceneID)
+func sceneChange(sceneID):
+	sceneChanger.emit(sceneID)
 	pass

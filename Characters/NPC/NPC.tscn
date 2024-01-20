@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://ndjgyfvjtgv0"]
+[gd_scene load_steps=18 format=3 uid="uid://ndjgyfvjtgv0"]
 
 [ext_resource type="Script" path="res://Characters/NPC/NPC.gd" id="1_fjl8l"]
 [ext_resource type="Texture2D" uid="uid://c4kg2o37iu7m6" path="res://assets/NPCs/npc.png" id="2_qape2"]
+[ext_resource type="PackedScene" uid="uid://sj5gims0tm5d" path="res://Interactions/InteractionArea.tscn" id="3_bjd5i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ku6yf"]
 atlas = ExtResource("2_qape2")
@@ -118,5 +119,7 @@ shape = SubResource("CircleShape2D_iqdtd")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="InteractionArea" parent="." instance=ExtResource("3_bjd5i")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

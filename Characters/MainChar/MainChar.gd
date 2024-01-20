@@ -9,12 +9,15 @@ const ACCELERATION = 500
 const FRICTION = 2500
 var oldCollider
 
+@onready var speechBubble = preload("res://Userinterfaces/SpeechBubble/speechBubble.tscn")
+
 signal house_collision(id)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
+	connectInteractionArea()
 	add_to_group("MainChar")
 	playerCoughScene = preload("res://Characters/MainChar/playerCough.tscn")
 	set_process_input(true)
@@ -45,7 +48,10 @@ func _input(event):
 			KEY_H:
 				#cough
 				createPlayerCough()
-				pass
+			KEY_F:
+				#Interaction
+				checkInteraction()
+				
 	pass
 
 func createPlayerCough():
@@ -57,9 +63,23 @@ func createPlayerCough():
 	#oPlayerCough.set_position(get_position())
 	#create a timer for playerCough to delete it after 2 seconds or smthng like that
 	pass
+	
+func checkInteraction():
+	var listOfAreas = $InteractionArea.get_overlapping_areas()
+	for i in listOfAreas:
+		var closestInteraction = null
+		if i is cInteractionArea:
+			i.interact()
 
+func connectInteractionArea():
+	$InteractionArea.setCollisionShape($CollisionShape2D.duplicate())
+	$InteractionArea.interactionTrigger.connect(interactionMenu)
+	
 func _on_Cough_timeout():
 	if oPlayerCough:
 		oPlayerCough.queue_free()
 		oPlayerCough = null
 	pass # Replace with function body.
+
+func interactionMenu():
+	pass

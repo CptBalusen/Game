@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b74ylqso7ojj7"]
+[gd_scene load_steps=8 format=3 uid="uid://b74ylqso7ojj7"]
 
 [ext_resource type="Script" path="res://Level/City1/CityView.gd" id="1_f3hw4"]
 [ext_resource type="Script" path="res://Level/City1/EventHandling.gd" id="1_fudwe"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dyhqixveqob5h" path="res://Buildings/House1/House1.tscn" id="2_o0xxj"]
 [ext_resource type="Script" path="res://Level/City1/backToMenu.gd" id="4_gscx6"]
 [ext_resource type="PackedScene" uid="uid://ndjgyfvjtgv0" path="res://Characters/NPC/NPC.tscn" id="6_1rj0r"]
-[ext_resource type="PackedScene" uid="uid://ndjgyfvjtgv0" path="res://Characters/NPC/NPC.tscn" id="6_a1cfr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uh1ys"]
 
 [node name="CityView" type="Node2D"]
 script = ExtResource("1_f3hw4")
@@ -49,3 +50,8 @@ position = Vector2(-295, 131)
 
 [node name="Npc3" parent="." instance=ExtResource("6_1rj0r")]
 position = Vector2(-77, 142)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_uh1ys")

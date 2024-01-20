@@ -1,16 +1,22 @@
 extends Node2D
 
 
-signal scene_changer(id)
+signal sceneChanger(id)
 
 @onready var camera = $playerViewCam
 @onready var player = $MainChar
 @onready var backButton = camera.get_node("Interface/backToMenu")
+@onready var buildingParent = $Buildings
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	backButton.scene_change.connect(_scene_change)
+	backButton.sceneChange.connect(sceneChange)
+	
+	var buildings = buildingParent.get_children()
+	for i in buildings:
+		if i.has_method("sceneChange"):
+			i.sceneChange.connect(sceneChange)
 	pass # Replace with function body.
 
 
@@ -24,6 +30,6 @@ func setCamera():
 	camera.set_position(player.get_position())
 	pass
 
-func _scene_change(id):
-	scene_changer.emit(id)
+func sceneChange(id):
+	sceneChanger.emit(id)
 	pass
