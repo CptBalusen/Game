@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://g08j201c8bkc"]
 
-[ext_resource type="Script" path="res://Characters/MainChar/MainChar.gd" id="1_2m3sh"]
+[ext_resource type="Script" path="res://Characters/MainChar/MainChar.gd" id="1_u12d6"]
 [ext_resource type="Texture2D" uid="uid://brxhpwpm12rbd" path="res://assets/MainChar/player.png" id="2_4xmpd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i61qo"]
@@ -104,7 +104,7 @@ animations = [{
 }]
 
 [node name="MainChar" type="CharacterBody2D"]
-script = ExtResource("1_2m3sh")
+script = ExtResource("1_u12d6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_i61qo")
@@ -113,3 +113,7 @@ shape = SubResource("CircleShape2D_i61qo")
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_mj2h4")
 animation = &"idle"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Cough_timeout"]

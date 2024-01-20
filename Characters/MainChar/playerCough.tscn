@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlvjt5ql5rudf"]
+
+[ext_resource type="Script" path="res://Characters/MainChar/playerCough.gd" id="1_tbksx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_32rrf"]
+radius = 24.0
+
+[node name="PlayerCough" type="Area2D"]
+modulate = Color(0.521569, 0.156863, 0.156863, 1)
+self_modulate = Color(0.584314, 0.0352941, 0, 1)
+script = ExtResource("1_tbksx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(0.156863, 1, 1, 1)
+self_modulate = Color(0.121569, 1, 1, 1)
+shape = SubResource("CircleShape2D_32rrf")
+debug_color = Color(0.2, 0.537255, 0.929412, 0.921569)
