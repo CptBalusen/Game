@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name CityView
+
 
 signal scene_changer(id)
 
@@ -27,3 +29,9 @@ func setCamera():
 func _scene_change(id):
 	scene_changer.emit(id)
 	pass
+	
+static func findNPCs(node: Node, result : Array) -> void:
+	if node is NPC:
+		result.push_back(node)
+	for child in node.get_children():
+		findNPCs(child, result)

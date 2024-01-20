@@ -17,7 +17,6 @@ func _on_body_entered (oNode2d):
 	if !oNode2d:
 		return
 		
-	
 	var groups = oNode2d.get_groups()
 	for group in groups:
 		if group == "NPC":

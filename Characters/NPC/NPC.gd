@@ -1,7 +1,11 @@
 extends CharacterBody2D
 
+class_name NPC
+
+var Infected_NPCScene
 var current_state = IDLE
 @export var speed = 30
+@export var isChased: bool = false
 var dir = Vector2.RIGHT
 
 var start_pos
@@ -17,6 +21,7 @@ func _ready():
 	add_to_group("NPC")
 	randomize()
 	start_pos = position
+	Infected_NPCScene = preload("res://Characters/NPC/Infected_NPC/Infected_NPC.tscn")
 
 func _process(delta):
 	
@@ -61,10 +66,14 @@ func _on_timer_timeout():
 	$Timer.wait_time = choose([0.5, 1, 1.5])
 	if (current_state != INFECTED):
 		current_state = choose([IDLE, NEW_DIR, MOVE])
-	else:
-		null
-		#Wenn infected, dann infected npc erzeugen.
-		#Daten wie Positionm übernehmen und NPC löschen. Zack!
+	else:		
+		var oInfected_NPC = Infected_NPCScene.instantiate()
+		oInfected_NPC.set_position(get_position())
+		get_parent().add_child(oInfected_NPC)
+		queue_free()
+		visible = false
+		pass
+		
 
 func infect():
 	print("hiillffee mama ich bin infiziert")
