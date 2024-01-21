@@ -7,7 +7,12 @@
 [ext_resource type="Script" path="res://Level/City1/backToMenu.gd" id="4_gscx6"]
 [ext_resource type="PackedScene" uid="uid://ndjgyfvjtgv0" path="res://Characters/NPC/NPC.tscn" id="6_1rj0r"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uh1ys"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_i45tj"]
+vertices = PackedVector2Array(-758, 510, -758, -444, -713, -438, 694, 510, 694, -438)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-712, -448, 704, -448, 704, 520, -768, 520, -768, -456)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
 
 [node name="CityView" type="Node2D"]
 script = ExtResource("1_f3hw4")
@@ -29,18 +34,22 @@ position = Vector2(-26, -19)
 layout_mode = 3
 anchors_preset = 0
 offset_left = -576.0
-offset_top = -324.0
+offset_top = -323.0
 offset_right = 576.0
-offset_bottom = 324.0
+offset_bottom = 325.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="backToMenu" type="Button" parent="playerViewCam/Interface"]
 layout_mode = 1
-offset_right = 8.0
-offset_bottom = 8.0
+offset_top = -1.0
+offset_right = 75.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 10
 text = "Back to menu"
 script = ExtResource("4_gscx6")
+metadata/_edit_use_anchors_ = true
 
 [node name="Npc" parent="." instance=ExtResource("6_1rj0r")]
 position = Vector2(-374, -167)
@@ -51,7 +60,6 @@ position = Vector2(-295, 131)
 [node name="Npc3" parent="." instance=ExtResource("6_1rj0r")]
 position = Vector2(-77, 142)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_i45tj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_uh1ys")
