@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqiw48q4oldft"]
+
+[ext_resource type="Script" path="res://Userinterfaces/SpeechBubble/speechBubble.gd" id="1_eny38"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7evy"]
+font_color = Color(0.12549, 0.12549, 0.12549, 1)
+shadow_size = 0
+
+[node name="SpeechBubble" type="Node2D"]
+script = ExtResource("1_eny38")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visibility_layer = 2
+offset_right = 723.0
+offset_bottom = 357.0
+
+[node name="Label" type="Label" parent="."]
+offset_right = 723.0
+offset_bottom = 357.0
+label_settings = SubResource("LabelSettings_o7evy")
+autowrap_mode = 3

@@ -13,6 +13,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-712, -448, 704, -448, 704, 520, -768, 520, -768, -456)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
+
 [node name="CityView" type="Node2D"]
 script = ExtResource("1_f3hw4")
 
@@ -61,3 +62,4 @@ position = Vector2(-77, 142)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_i45tj")
+

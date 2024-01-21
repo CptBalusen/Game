@@ -12,11 +12,10 @@ func _ready():
 	savedPackagedSceneArray[GameScenes.IDs.MainMenu] = childScene
 	childInstance = childScene.instantiate()
 	add_child(childInstance)
-	get_child(1).scene_changer.connect(scene_change)
+	get_child(1).sceneChanger.connect(sceneChange)
 	childSceneID = 0
 	sceneArray[0] = childInstance
 	_init_sceneArray()
-	pass # Replace with function body.
 	
 func _init_sceneArray():
 	var sceneToAdd
@@ -46,26 +45,34 @@ func _init_sceneArray():
 	if(sceneToAdd == null):
 		print("ERROR IN SCENE ARRAY LOADING HOUSE2 INTERIOR")
 
-	pass
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 	
 func _check_reset(id):
 	match(id):
-		0, 1:
+		GameScenes.IDs.MainMenu, GameScenes.IDs.Settings:
 			return true
 		_:
 			return false
-	pass
+	
+func checkMainCharAvailable(id):
+	match(id):
+		GameScenes.IDs.CityView, GameScenes.IDs.House1Interior, GameScenes.IDs.House2Interior:
+			return true
+		_:
+			return false
 
-func scene_change(sceneID):
-	print("ChildScene before Change ", childSceneID)
+func sceneChange(sceneID):
 	var signalConnectionNeeded = false
+	var childMainChar
 	if(sceneArray[sceneID] == null):
 		sceneArray[sceneID] = savedPackagedSceneArray[sceneID].instantiate()
 		signalConnectionNeeded = true
+	
+	if get_child(1).get_node("MainChar") != null && checkMainCharAvailable(sceneID):
+		childMainChar = checkMainCharCopy(get_child(1))
+	
 	if(_check_reset(childSceneID)):
 		get_child(1).queue_free()
 		sceneArray[childSceneID] = null
@@ -73,10 +80,19 @@ func scene_change(sceneID):
 	sceneArray[sceneID].request_ready()
 	add_child(sceneArray[sceneID])
 	
+	if(childMainChar != null):
+		get_child(1).add_child(childMainChar)
+	
 	if(signalConnectionNeeded):
-		get_children()[1].scene_changer.connect(scene_change)
+		get_children()[1].sceneChanger.connect(sceneChange)
 		
 	childSceneID = sceneID
-	print("ChildScene after Change ", childSceneID)
-	pass
+
+	
+func checkMainCharCopy(copyFrom):
+	var mainChar = copyFrom.get_node("MainChar")
+	if mainChar != null:
+		return mainChar.duplicate()
+		
+
 

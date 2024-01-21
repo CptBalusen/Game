@@ -1,11 +1,11 @@
 extends Control
 
 @onready var backButton = $b_BackToMenu
-signal scene_changer(id)
+signal sceneChanger(id)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	backButton.scene_change.connect(_scene_change)
+	backButton.sceneChange.connect(sceneChange)
 	pass # Replace with function body.
 	
 	
@@ -13,6 +13,6 @@ func _ready():
 func _process(delta):
 	pass
 	
-func _scene_change(sceneID):
-	scene_changer.emit(sceneID)
+func sceneChange(sceneID):
+	sceneChanger.emit(sceneID)
 	pass

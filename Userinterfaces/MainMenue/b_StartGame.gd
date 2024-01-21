@@ -1,6 +1,6 @@
 extends Button
 
-signal scene_change(id)
+signal sceneChange(id)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,5 +13,5 @@ func _process(delta):
 	pass
 
 func _pressed():
-	scene_change.emit(2)
+	sceneChange.emit(2)
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://g08j201c8bkc"]
+[gd_scene load_steps=18 format=3 uid="uid://g08j201c8bkc"]
 
 [ext_resource type="Script" path="res://Characters/MainChar/MainChar.gd" id="1_u12d6"]
 [ext_resource type="Texture2D" uid="uid://brxhpwpm12rbd" path="res://assets/MainChar/player.png" id="2_4xmpd"]
+[ext_resource type="PackedScene" uid="uid://sj5gims0tm5d" path="res://Interactions/InteractionArea.tscn" id="3_dvmnd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i61qo"]
 radius = 16.0
@@ -116,5 +117,7 @@ sprite_frames = SubResource("SpriteFrames_mj2h4")
 animation = &"idle"
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="InteractionArea" parent="." instance=ExtResource("3_dvmnd")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Cough_timeout"]
