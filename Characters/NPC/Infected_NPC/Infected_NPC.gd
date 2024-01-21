@@ -1,64 +1,70 @@
 extends CharacterBody2D
 
-var current_state = IDLE
-@export var speed = 30
-var dir = Vector2.RIGHT
+class_name Infected_NPC
 
-var start_pos
+@onready var nav: NavigationAgent2D = $NavigationAgent2D
 
-enum {
-	IDLE,
-	NEW_DIR,
-	MOVE,
-}
+var speed = 50
+var accel = 7
+
+var chasedNPC: NPC
 
 func _ready():
 	add_to_group("Infected_NPC")
-	randomize()
-	start_pos = position
 
 func _process(delta):
+	var results: Array
 	
-	match current_state:
-		IDLE:
-			$AnimatedSprite2D.play("idle")
-			pass
-		NEW_DIR:
-			$AnimatedSprite2D.play("idle")
-			dir = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN ])
-			pass
-		MOVE:
-			$AnimatedSprite2D.play("walk")
-			move(delta)
-			pass
-
-func move(delta):
-	position += dir * speed * delta
-	# set the ressource of the npc to the direction he is moving to
-	#$AnimatedSprite2D.flip_h = !dir.x > 0;
+	CityView.findNPCs(get_parent(), results)
 	
-	if dir.x > 0:
-		$AnimatedSprite2D.flip_h = false
-	elif dir.x < 0:
-		$AnimatedSprite2D.flip_h = true
-		
-	# boundaries of the maximum movement square of the npc
-	if position.x >= start_pos.x + 20:
-		position.x = start_pos.x + 19.9
-	elif position.x <= start_pos.x - 20:
-		position.x = start_pos.x - 19.9
-	elif position.y >= start_pos.y + 20:
-		position.y = start_pos.y + 19.9
-	elif position.y <= start_pos.y - 20:
-		position.y = start_pos.y - 19.9
+	if (!results.is_empty()):
+		chaseNPC(delta)
+	else:
+		idle()
+	pass
 
 func choose(array):
 	array.shuffle()
 	return array.front()
 
-func _on_timer_timeout():
-	$Timer.wait_time = choose([0.5, 1, 1.5])
-	current_state = choose([IDLE, NEW_DIR, MOVE])
+func chaseNPC(delta):
+	var direction = Vector3()
+	var npc_position = Vector3()
 	
-func getCurrentState():
-	return current_state
+	$AnimatedSprite2D.play("walk")
+	
+	#get the nearest npc pos
+	npc_position = getNearestNpcPosition()
+	nav.target_position = npc_position
+	
+	direction = nav.get_next_path_position() - global_position
+	direction = direction.normalized()
+	
+	velocity = velocity.lerp(direction * speed, accel * delta)
+	
+	move_and_slide()
+
+func getNearestNpcPosition() -> Vector2:
+	var results: Array
+	var closest_npc = null
+	var closest_npc_distance = 0.0
+	
+	CityView.findNPCs(get_parent(), results)
+	
+	for npc in results:
+		var current_npc_distance = get_position().distance_to(npc.global_position)
+		if (closest_npc == null or current_npc_distance < closest_npc_distance and !npc.isChased):
+			closest_npc = npc
+			closest_npc_distance = current_npc_distance
+	
+	if closest_npc != null:
+		chasedNPC = closest_npc
+		chasedNPC.isChased = true
+		return chasedNPC.get_position()
+	else:
+		return get_position()
+		
+func idle():
+	$AnimatedSprite2D.play("idle")
+	pass
+	

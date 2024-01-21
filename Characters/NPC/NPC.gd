@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-class_name Infected_NPC
+class_name NPC
 
 var Infected_NPCScene
 var current_state = IDLE
 @export var speed = 30
+@export var isChased: bool = false
 var dir = Vector2.RIGHT
 
 var start_pos
