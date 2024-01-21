@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn2xhia5kltxe"]
+[gd_scene load_steps=4 format=3 uid="uid://dn2xhia5kltxe"]
 
 [ext_resource type="Script" path="res://GameStateHandling/GameView/GameViewStateHandling.gd" id="1_kalib"]
 [ext_resource type="Script" path="res://GameStateHandling/GameView/GameSceneIDS.gd" id="2_i1g23"]
+[ext_resource type="PackedScene" uid="uid://b2ai35d20mq8i" path="res://GameStateHandling/GameStateHandling/GameState.tscn" id="3_selgj"]
 
 [node name="GameView" type="Node2D"]
 script = ExtResource("1_kalib")
@@ -10,3 +11,5 @@ script = ExtResource("1_kalib")
 
 [node name="GameSceneIDS" type="Node" parent="Scripts"]
 script = ExtResource("2_i1g23")
+
+[node name="GameState" parent="Scripts" instance=ExtResource("3_selgj")]

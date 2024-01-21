@@ -14,6 +14,7 @@ enum {
 }
 
 func _ready():
+	connectInteractionArea()
 	add_to_group("NPC")
 	randomize()
 	start_pos = position
@@ -73,3 +74,10 @@ func infect():
 	
 func getCurrentState():
 	return current_state
+	
+func connectInteractionArea():
+	$InteractionArea.setCollisionShape($CollisionShape2D.duplicate())
+	$InteractionArea.interactionTrigger.connect(interactionMenu)
+	
+func interactionMenu():
+	print("HIER MUSS DU INTERAGIEREN DU HUSO")
